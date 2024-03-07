@@ -17,3 +17,5 @@ app/build
 I18nProvider/build
 LocaleFlexPicker/build
 /.idea
+deeplink-project/build
+deeplink-project/test-deeplink-app/build
