@@ -19,3 +19,7 @@ LocaleFlexPicker/build
 /.idea
 deeplink-project/build
 deeplink-project/test-deeplink-app/build
+video-list/Video-HighQuality-cacherkit/build
+video-list/Video-HighQuality-commonkit/build
+video-list/Video-HighQuality-playerkit/build
+video-list/Video-HighQuality-uikit/build

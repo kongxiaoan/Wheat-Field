@@ -10,7 +10,12 @@ import java.util.Locale
  * @description: android M API 实现
  */
 class I8nAndroidMApiImpl : I18nBaseApi {
-    override fun getFormatTime(time: Long): String? {
-        return "test"
+    override fun updateLocal(locale: Locale) {
+        TODO("Not yet implemented")
     }
+
+    override fun getAlphabeticIndexByLocale(): Array<String> {
+        return indexArray()
+    }
+
 }

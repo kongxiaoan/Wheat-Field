@@ -9,19 +9,6 @@ import java.util.Locale
  * @description: 国家化APi抽象文件
  */
 interface I18nBaseApi {
-    /**
-     * 格式化long时间
-     *
-     * @param time 时间戳(秒)
-     * @return 格式化后的时间
-     */
-    fun getFormatTime(time: Long): String?
-
-    fun timeFormat(time: Long): Long {
-        return if (time.toString().length == 13) {
-            time
-        } else {
-            time * 1000L
-        }
-    }
+    fun updateLocal(locale: Locale)
+    fun getAlphabeticIndexByLocale(): Array<String>
 }

@@ -1,7 +1,10 @@
 package com.kpa.i18.internal
 
+import android.icu.text.AlphabeticIndex
 import android.icu.text.DateFormat
 import com.kpa.i18.base.I18nBaseApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.Date
 import java.util.Locale
 
@@ -13,12 +16,22 @@ import java.util.Locale
  */
 class I8nAndroidNApiImpl : I18nBaseApi {
 
-    private val dataFormat by lazy {
-        DateFormat.getDateTimeInstance()
+    private val index: AlphabeticIndex<Int> by lazy {
+        AlphabeticIndex<Int>(getLocale())
     }
 
-    override fun getFormatTime(time: Long): String? {
-        if (time <= 0) return null
-        return dataFormat.format(Date(timeFormat(time)))
+
+    override fun updateLocal(locale: Locale) {
+        TODO("Not yet implemented")
+    }
+
+
+    override fun getAlphabeticIndexByLocale(): Array<String> {
+        return try {
+            val bucketLabels = index.bucketLabels
+            bucketLabels.toTypedArray()
+        } finally {
+            indexArray()
+        }
     }
 }
