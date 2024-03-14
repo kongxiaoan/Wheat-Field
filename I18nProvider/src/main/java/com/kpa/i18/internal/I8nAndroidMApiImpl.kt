@@ -14,8 +14,12 @@ class I8nAndroidMApiImpl : I18nBaseApi {
         TODO("Not yet implemented")
     }
 
-    override fun getAlphabeticIndexByLocale(): Array<String> {
+    override fun getAlphabeticIndexByLocale(): MutableList<String> {
         return indexArray()
+    }
+
+    override fun getISOCountries(): Array<String> {
+        TODO("Not yet implemented")
     }
 
 }

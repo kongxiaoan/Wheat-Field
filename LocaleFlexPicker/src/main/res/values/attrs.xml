@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CountryOrRegionSideBar">
+        <attr name="letterColor" format="color" />
+        <attr name="selectColor" format="color" />
+        <attr name="selectBgColor" format="color" />
+        <attr name="letterSize" format="dimension" />
+        <attr name="isFirstShowIcon" format="boolean" />
+        <attr name="selectedIcon" format="reference" />
+        <attr name="unselectedIcon" format="reference" />
+    </declare-styleable>
+</resources>

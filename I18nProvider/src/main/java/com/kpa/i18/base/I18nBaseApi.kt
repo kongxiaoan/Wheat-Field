@@ -10,5 +10,7 @@ import java.util.Locale
  */
 interface I18nBaseApi {
     fun updateLocal(locale: Locale)
-    fun getAlphabeticIndexByLocale(): Array<String>
+    fun getAlphabeticIndexByLocale(): MutableList<String>
+
+    fun getISOCountries(): Array<String>
 }

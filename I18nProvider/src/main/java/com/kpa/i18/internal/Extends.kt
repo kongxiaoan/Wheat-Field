@@ -33,8 +33,8 @@ inline fun Long.timeFormat(): Long {
     }
 }
 
-inline fun I18nBaseApi.indexArray(): Array<String> {
-    return arrayOf(
+inline fun I18nBaseApi.indexArray(): MutableList<String> {
+    return arrayListOf(
         "A",
         "B",
         "C",

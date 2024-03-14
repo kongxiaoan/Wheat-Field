@@ -12,12 +12,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val isoCountries = ULocale.getISOCountries()
-//        isoCountries.forEach {
-//            Log.d(
-//                "MainActivity",
-//                "--- ${ULocale("", it).getDisplayCountry(ULocale.ENGLISH)}    code  = $it"
-//            )
-//        }
+        isoCountries.forEach {
+            Log.d(
+                "MainActivity",
+                "--- ${ULocale("", it).getDisplayCountry(ULocale.ENGLISH)}    code  = $it"
+            )
+        }
 
         Log.d("MainActivity", getPinyin("你好中国"))
         Log.d("MainActivity", getFirstLetters(getPinyin("你好中国")))

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/main_page_background"
+    android:paddingStart="@dimen/size_15dp"
+    android:paddingEnd="@dimen/size_15dp">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_11dp"
+        android:layout_marginBottom="@dimen/size_11dp"
+        android:singleLine="true"
+        android:textColor="@color/main_page_et_text_color"
+        android:textSize="@dimen/text_size_14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="叶良辰" />
+
+
+    <TextView
+        android:id="@+id/tv_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_35dp"
+        android:textColor="@color/main_page_slide_bar_letterColor"
+        android:textSize="@dimen/text_size_13sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_name" />
+
+    <View
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="@dimen/size_0.5dp"
+        android:layout_marginEnd="@dimen/size_22dp"
+        android:background="@color/main_page_line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
