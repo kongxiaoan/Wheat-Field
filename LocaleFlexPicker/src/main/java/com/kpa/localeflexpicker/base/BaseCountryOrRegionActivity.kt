@@ -1,6 +1,7 @@
 package com.kpa.localeflexpicker.base
 
 import android.graphics.Color
+import android.icu.util.ULocale
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
@@ -12,6 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kpa.i18.I18nProvider
 import com.kpa.localeflexpicker.utils.UIUtils
 import com.kpa.localeflexpicker.widget.CountryOrRegionSideBar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  *
@@ -19,7 +26,7 @@ import com.kpa.localeflexpicker.widget.CountryOrRegionSideBar
  * @date: 2024/3/14
  * @description:
  */
-abstract class BaseCountryOrRegionActivity : AppCompatActivity() {
+abstract class BaseCountryOrRegionActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     protected abstract fun buildRecyclerView(): RecyclerView
 
@@ -31,8 +38,9 @@ abstract class BaseCountryOrRegionActivity : AppCompatActivity() {
 
     protected abstract fun buildSideBar(): CountryOrRegionSideBar
 
-    protected val selectedCountries = ArrayList<CountryOrRegionEntity>()
-    protected val allCountries = ArrayList<CountryOrRegionEntity>()
+    protected var selectedCountries = ArrayList<CountryOrRegionEntity>()
+    protected var allCountries: MutableList<CountryOrRegionEntity> =
+        arrayListOf<CountryOrRegionEntity>()
     private var suspendBarHeight = 0
     private var adapter: BaseCountryOrRegionSpellAdapter<*>? = null
     private var textView: TextView? = null
@@ -48,8 +56,26 @@ abstract class BaseCountryOrRegionActivity : AppCompatActivity() {
             lightNavigationBar = false,
             immersiveNavigationBar = false
         )
-        allCountries.clear()
-        allCountries.addAll(I18nProvider.i18nApi.getISOCountries())
+        launch(Dispatchers.IO) {
+            val isoCountriesEntities =
+                I18nProvider.i18nApi.getISOCountriesByLocale(ULocale.getDefault())
+            val countryOrRegionEntities = isoCountriesEntities.map { isoCountry ->
+                CountryOrRegionEntity(
+                    InternalState().apply {
+                        code = isoCountry.countriesRegion
+                        name = isoCountry.countriesName
+                        spell = isoCountry.countriesAllSpell
+                        indexName = isoCountry.countriesFirstSpell
+                        headerSpell = isoCountry.countriesHead
+                    },
+                    ExternalState(false)
+                )
+            }
+            withContext(Dispatchers.Main) {
+                allCountries.clear()
+                allCountries.addAll(countryOrRegionEntities)
+            }
+        }
         selectedCountries.clear()
         selectedCountries.addAll(allCountries)
         initRv()
@@ -117,7 +143,7 @@ abstract class BaseCountryOrRegionActivity : AppCompatActivity() {
                 var slideText = ""
                 if (firstBean is BaseCountryOrRegionSpellAdapter.LetterEntity) {
                     slideText = firstBean.getSpell().toUpperCase()
-                } else if (firstBean.getPriority() === 0) {
+                } else if (firstBean?.getPriority() == 0) {
                     slideText = firstBean.getIndexName().toUpperCase()
                 }
                 textView?.text = slideText
@@ -140,4 +166,8 @@ abstract class BaseCountryOrRegionActivity : AppCompatActivity() {
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
+    }
 }

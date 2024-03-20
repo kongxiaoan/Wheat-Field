@@ -1,4 +1,4 @@
-package com.kpa.i18
+package com.kpa.popupsimple
 
 import org.junit.Test
 
@@ -13,6 +13,5 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
-
     }
 }

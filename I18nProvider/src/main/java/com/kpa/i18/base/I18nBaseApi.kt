@@ -1,5 +1,7 @@
 package com.kpa.i18.base
 
+import android.icu.util.ULocale
+import com.kpa.i18.entities.ISOCountriesEntity
 import java.util.Locale
 
 /**
@@ -13,4 +15,6 @@ interface I18nBaseApi {
     fun getAlphabeticIndexByLocale(): MutableList<String>
 
     fun getISOCountries(): Array<String>
+
+    suspend fun getISOCountriesByLocale(locale:ULocale): MutableList<ISOCountriesEntity>
 }
